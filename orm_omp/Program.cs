@@ -24,7 +24,7 @@ internal class Program
             if (a < 0 || a > 999 || b < 0 || b > 999 || c < 0 || c > 999) throw new Exception("Error! Some values are out of range.");
             Console.WriteLine("Processing...");
 
-            List<Coord> rx = new List<Coord>() { new Coord(250, 600, 000), new Coord(590, 400, 500), new Coord(600, 200, 999) };
+            List<Coord> rx = new List<Coord>() { new Coord(250, 600, a), new Coord(590, 400, b), new Coord(600, 200, c) };
             List<double[,]> DOP = new List<double[,]>() { new double[1000, 1000], new double[1000, 1000] };
             List<string> DOPstr = new List<string>() { "PDOP", "HDOP" };
 
