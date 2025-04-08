@@ -43,8 +43,8 @@ internal class Program
                     }
                     Matrix JR = JRT.transpose();
                     SquareMatrix QI = new SquareMatrix(JRT.rowsAmount, JRT.rowsAmount);
-                    QI = QI.mat2SqMat(JRT * JR);
-                    SquareMatrix Q = QI.inverse();
+                    QI = SquareMatrix.mat2SqMat(JRT * JR);
+                    SquareMatrix Q = SquareMatrix.mat2SqMat(-QI.pseudoInverse());
                     DOP[0][x, y] = Math.Sqrt(Q.mat[0, 0] * Q.mat[0, 0] + Q.mat[1, 1] * Q.mat[1, 1] + Q.mat[2, 2] * Q.mat[2, 2]);
                     DOP[1][x, y] = Math.Sqrt(Q.mat[0, 0] * Q.mat[0, 0] + Q.mat[1, 1] * Q.mat[1, 1]);
                 }
@@ -59,13 +59,16 @@ internal class Program
                     for (int y = 0; y < 1000; y++)
                     {
                         int val = 0;
-                        if ((double.IsNaN(DOP[i][y, x])) || (double.IsInfinity(DOP[i][y, x])))
-                        {
-                            DOP[i][y, x] = max;
+                        if ((double.IsNaN(DOP[i][x, y])) || (double.IsInfinity(DOP[i][x, y]))|| (double.IsInfinity(-DOP[i][x, y]))) {
+                            DOP[i][x, y] = max;
                         }
-                        val = Convert.ToInt32(Math.Log10(DOP[i][y, x]) / Math.Log10(max) * 255);
+                        double curDOP = DOP[i][x, y];
+                        if (curDOP == 0) curDOP = double.MinValue;
+                        else curDOP = Double.Log10(curDOP);
+                        if (curDOP < 0) curDOP = 0;
+                        val = Convert.ToInt32(curDOP / Math.Log10(max) * 255);
                         var col = Color.FromArgb(val, val, val);
-                        bmp.SetPixel(x, y, col);
+                        bmp.SetPixel(y, x, col); // transposed due to x,y axis orientation
                     }
                 }
                 bmp.Save($".\\{DOPstr[i]}.bmp");

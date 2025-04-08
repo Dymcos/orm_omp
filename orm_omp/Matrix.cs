@@ -42,6 +42,17 @@ namespace orm_omp
             }
             return result;
         }
+        public static Matrix operator -(Matrix a){
+            var result = new Matrix(a.rowsAmount,a.columnsAmount);
+            for( int i=0; i < a.rowsAmount; i++)
+            {
+                for( int j = 0;j < a.columnsAmount; j++)
+                {
+                    result.mat[i,j] = -a.mat[i,j];
+                }
+            }
+            return result;
+        }
         public Matrix transpose()
         {
             var result = new Matrix(this.columnsAmount, this.rowsAmount);

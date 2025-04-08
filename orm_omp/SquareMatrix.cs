@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -22,7 +23,7 @@ namespace orm_omp
                 return this.mat[0, 0] * this.mat[1, 1] * this.mat[2, 2] + this.mat[0, 1] * this.mat[1, 2] * this.mat[2, 0] + this.mat[0, 2] * this.mat[1, 0] * this.mat[2, 1] - this.mat[0, 2] * this.mat[1, 1] * this.mat[2, 0] - this.mat[0, 1] * this.mat[1, 0] * this.mat[2, 2] - this.mat[0, 0] * this.mat[1, 2] * this.mat[2, 1];
             throw new Exception("det is appliable only for 1x1, 2x2 or 3x3 sized matriсes");
         }
-        public SquareMatrix mat2SqMat(Matrix a)
+        public static SquareMatrix mat2SqMat(Matrix a)
         {
             SquareMatrix result = new SquareMatrix(a.rowsAmount, a.columnsAmount);
             for (int i = 0; i < a.rowsAmount; i++)
@@ -62,6 +63,18 @@ namespace orm_omp
             }
             return result;
         }
+        public new SquareMatrix transpose()
+        {
+            var result = new SquareMatrix(this.columnsAmount, this.rowsAmount);
+            for (int i = 0; i < result.rowsAmount; i++)
+            {
+                for (int j = 0; j < result.columnsAmount; j++)
+                {
+                    result.mat[i, j] = this.mat[j, i];
+                }
+            }
+            return result;
+        }
         public SquareMatrix inverse()
         {
             var result = new SquareMatrix(this.size, this.size);
@@ -75,17 +88,14 @@ namespace orm_omp
             }
             return result;
         }
-        public new SquareMatrix transpose()
+        public SquareMatrix pseudoInverse()
         {
-            var result = new SquareMatrix(this.columnsAmount, this.rowsAmount);
-            for (int i = 0; i < result.rowsAmount; i++)
-            {
-                for (int j = 0; j < result.columnsAmount; j++)
-                {
-                    result.mat[i, j] = this.mat[j, i];
-                }
-            }
+            SquareMatrix result;
+            result = SquareMatrix.mat2SqMat(this.transpose() * this);
+            result = result.inverse();
+            result = SquareMatrix.mat2SqMat(result * this.transpose());
             return result;
         }
+       
     }
 }
