@@ -13,27 +13,35 @@ internal class Program
         {
             int z;
 
+            // select z to calculate and draw
             Console.WriteLine($"Enter z coordinate for bitmap [0, 999]");
             z = Convert.ToInt16(Console.ReadLine());
             if (z < 0 || z > 999) throw new Exception("Error! Selected z value is out of range.");
-            int a, b, c;
-            Console.WriteLine($"Enter z coordinates of resceivers (3 numbers in range of [0, 999])");
-            a = Convert.ToInt16(Console.ReadLine());
-            b = Convert.ToInt16(Console.ReadLine());
-            c = Convert.ToInt16(Console.ReadLine());
-            if (a < 0 || a > 999 || b < 0 || b > 999 || c < 0 || c > 999) throw new Exception("Error! Some values are out of range.");
+            
+            // initializing receivers
+            List<Coord> rx = new List<Coord>();
+            while (true)
+            {
+                int a, b, c;
+                Console.WriteLine($"Enter three coordinates to add a receiver (3 numbers in range of [0, 999]). Enter any coordinate out of range of [0,999] to start processing");
+                a = Convert.ToInt16(Console.ReadLine());
+                b = Convert.ToInt16(Console.ReadLine());
+                c = Convert.ToInt16(Console.ReadLine());
+                if (a < 0 || a > 999 || b < 0 || b > 999 || c < 0 || c > 999) break;
+                rx.Add(new Coord(a, b, c));
+            }
+            
             Console.WriteLine("Processing...");
 
-            List<Coord> rx = new List<Coord>() { new Coord(250, 600, a), new Coord(590, 400, b), new Coord(600, 200, c) };
+            // calculating DOP matrices
             List<double[,]> DOP = new List<double[,]>() { new double[1000, 1000], new double[1000, 1000] };
             List<string> DOPstr = new List<string>() { "PDOP", "HDOP" };
-
             for (int x = 0; x < 1000; x++)
             {
                 for (int y = 0; y < 1000; y++)
                 {
                     Coord crd = new Coord(x, y, z);
-                    Matrix JRT = new Matrix(3, 3);
+                    Matrix JRT = new Matrix(3, rx.Count);
                     for (int l = 0; l < JRT.columnsAmount; l++)
                     {
                         Coord diff = rx[l] - crd;
@@ -50,6 +58,7 @@ internal class Program
                 }
             }
 
+            // creating a bitmap
             Bitmap bmp = new Bitmap(1000, 1000);
             for (int i = 0; i < 2; i++)
             {
@@ -64,7 +73,7 @@ internal class Program
                         }
                         double curDOP = DOP[i][x, y];
                         if (curDOP == 0) curDOP = double.MinValue;
-                        else curDOP = Double.Log10(curDOP);
+                        else curDOP = double.Log10(curDOP);
                         if (curDOP < 0) curDOP = 0;
                         val = Convert.ToInt32(curDOP / Math.Log10(max) * 255);
                         var col = Color.FromArgb(val, val, val);
@@ -74,6 +83,8 @@ internal class Program
                 bmp.Save($".\\{DOPstr[i]}.bmp");
             }
             Console.WriteLine("Done! Results are saved in PDOP.bmp and HDOP.bmp. Black stands for min and white stands for max.");
+            
+            // asking to continue
             Console.WriteLine("Do you want to try again? 1 for Yes and 0 for No");
             do
             {

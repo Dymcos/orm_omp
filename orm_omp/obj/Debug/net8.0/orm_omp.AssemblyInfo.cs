@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("orm_omp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+df19f2db21952092242f9f579e5b48b727ee2183")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e1c944ed60aa6dd9d14c9d2987ea74ebf67e032c")]
 [assembly: System.Reflection.AssemblyProductAttribute("orm_omp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("orm_omp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
