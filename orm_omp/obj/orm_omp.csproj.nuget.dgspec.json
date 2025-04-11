@@ -1,31 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\dymco\\source\\repos\\orm_omp\\orm_omp\\orm_omp.csproj": {}
+    "C:\\students\\omp_1\\orm_omp\\orm_omp\\orm_omp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\dymco\\source\\repos\\orm_omp\\orm_omp\\orm_omp.csproj": {
+    "C:\\students\\omp_1\\orm_omp\\orm_omp\\orm_omp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dymco\\source\\repos\\orm_omp\\orm_omp\\orm_omp.csproj",
+        "projectUniqueName": "C:\\students\\omp_1\\orm_omp\\orm_omp\\orm_omp.csproj",
         "projectName": "orm_omp",
-        "projectPath": "C:\\Users\\dymco\\source\\repos\\orm_omp\\orm_omp\\orm_omp.csproj",
-        "packagesPath": "C:\\Users\\dymco\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dymco\\source\\repos\\orm_omp\\orm_omp\\obj\\",
+        "projectPath": "C:\\students\\omp_1\\orm_omp\\orm_omp\\orm_omp.csproj",
+        "packagesPath": "C:\\Users\\Hasee_stc\\.nuget\\packages\\",
+        "outputPath": "C:\\students\\omp_1\\orm_omp\\orm_omp\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\dymco\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Hasee_stc\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -43,16 +38,19 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.200"
+        }
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Accord.Math": {
+              "target": "Package",
+              "version": "[3.8.2-alpha, )"
+            },
             "System.Drawing.Common": {
               "target": "Package",
-              "version": "[9.0.3, )"
+              "version": "[10.0.0-preview.3.25173.2, )"
             }
           },
           "imports": [
@@ -71,7 +69,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

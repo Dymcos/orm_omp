@@ -3,6 +3,8 @@
 using orm_omp;
 using System.Windows.Markup;
 using System.Drawing;
+using Accord.Math;
+using Matrix = orm_omp.Matrix;
 
 internal class Program
 {
@@ -33,21 +35,27 @@ internal class Program
                 for (int y = 0; y < 1000; y++)
                 {
                     Coord crd = new Coord(x, y, z);
-                    Matrix JRT = new Matrix(3, 3);
-                    for (int l = 0; l < JRT.columnsAmount; l++)
+                    Matrix jacobMatrix = new Matrix(3, 3);
+                    for (int l = 0; l < jacobMatrix.columnsAmount; l++)
                     {
                         Coord diff = rx[l] - crd;
-                        JRT.mat[0, l] = -diff.x / diff.Norm();
-                        JRT.mat[1, l] = -diff.y / diff.Norm();
-                        JRT.mat[2, l] = -diff.z / diff.Norm();
+                        jacobMatrix.mat[0, l] = -diff.x / diff.Norm();
+                        jacobMatrix.mat[1, l] = -diff.y / diff.Norm();
+                        jacobMatrix.mat[2, l] = -diff.z / diff.Norm();
                     }
-                    Matrix JR = JRT.transpose();
-                    SquareMatrix QI = new SquareMatrix(JRT.rowsAmount, JRT.rowsAmount);
-                    QI = SquareMatrix.mat2SqMat(JRT * JR);
-                    SquareMatrix Q = SquareMatrix.mat2SqMat(-QI.pseudoInverse());
-                    DOP[0][x, y] = Math.Sqrt(Q.mat[0, 0] * Q.mat[0, 0] + Q.mat[1, 1] * Q.mat[1, 1] + Q.mat[2, 2] * Q.mat[2, 2]);
-                    DOP[1][x, y] = Math.Sqrt(Q.mat[0, 0] * Q.mat[0, 0] + Q.mat[1, 1] * Q.mat[1, 1]);
-                }
+                    Matrix jacobMatrixT = jacobMatrix.transpose();
+                    SquareMatrix QI = new SquareMatrix(jacobMatrix.rowsAmount, jacobMatrix.rowsAmount);
+                    QI = SquareMatrix.mat2SqMat(jacobMatrix * jacobMatrixT);
+                    SquareMatrix Q = QI.pseudoInverse();
+
+                    var inversed = QI.mat.PseudoInverse();
+
+                    //DOP[0][x, y] = Math.Sqrt(Q.mat[0, 0] * Q.mat[0, 0] + Q.mat[1, 1] * Q.mat[1, 1] + Q.mat[2, 2] * Q.mat[2, 2]);
+                    //DOP[1][x, y] = Math.Sqrt(Q.mat[0, 0] * Q.mat[0, 0] + Q.mat[1, 1] * Q.mat[1, 1]);
+
+					DOP[0][x, y] = Math.Sqrt(inversed[0, 0] * inversed[0, 0] + inversed[1, 1] * inversed[1, 1] + inversed[2, 2] * inversed[2, 2]);
+					DOP[1][x, y] = Math.Sqrt(inversed[0, 0] * inversed[0, 0] + inversed[1, 1] * inversed[1, 1]);
+				}
             }
 
             Bitmap bmp = new Bitmap(1000, 1000);
