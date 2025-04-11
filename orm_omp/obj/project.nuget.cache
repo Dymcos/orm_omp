@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "hqJSbXNbLmM=",
+  "dgSpecHash": "pXTTblF9Pwwd4oTb1o7s3T7ZHtlJfLBFZfYdCQ7o4qHH67MqE0ocCSZOXAryD3Sx7c2P7WjNHjmPdWsNgAiMzQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\dymco\\source\\repos\\orm_omp\\orm_omp\\orm_omp.csproj",
+  "projectFilePath": "C:\\students\\omp_1\\orm_omp\\orm_omp\\orm_omp.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\dymco\\.nuget\\packages\\microsoft.win32.systemevents\\9.0.3\\microsoft.win32.systemevents.9.0.3.nupkg.sha512",
-    "C:\\Users\\dymco\\.nuget\\packages\\system.drawing.common\\9.0.3\\system.drawing.common.9.0.3.nupkg.sha512"
+    "C:\\Users\\Hasee_stc\\.nuget\\packages\\accord\\3.8.2-alpha\\accord.3.8.2-alpha.nupkg.sha512",
+    "C:\\Users\\Hasee_stc\\.nuget\\packages\\accord.math\\3.8.2-alpha\\accord.math.3.8.2-alpha.nupkg.sha512",
+    "C:\\Users\\Hasee_stc\\.nuget\\packages\\microsoft.win32.systemevents\\10.0.0-preview.3.25171.5\\microsoft.win32.systemevents.10.0.0-preview.3.25171.5.nupkg.sha512",
+    "C:\\Users\\Hasee_stc\\.nuget\\packages\\system.drawing.common\\10.0.0-preview.3.25173.2\\system.drawing.common.10.0.0-preview.3.25173.2.nupkg.sha512"
   ],
   "logs": []
 }
